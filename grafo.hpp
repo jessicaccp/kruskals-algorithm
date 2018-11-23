@@ -13,13 +13,16 @@ class Grafo {
 
     public:
         Grafo(std::string arquivo);
+
         void criarGrafo();
+
+        std::string getFormato();
+        int getDimensao();
 
         void setNome(std::string nome);
         void setComentario(std::string comentario);
         void setFormato(std::string formato);
         void setDimensao(int dimensao);
-        void setArestas(std::vector<Aresta> arestas);
 };
 
 #endif
