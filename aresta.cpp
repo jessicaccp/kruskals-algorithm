@@ -17,3 +17,7 @@ int Aresta::getV2() {
 int Aresta::getPeso() {
     return peso;
 }
+
+bool Aresta::operator < (const Aresta& aresta2) const {
+	return (peso < aresta2.peso);
+}

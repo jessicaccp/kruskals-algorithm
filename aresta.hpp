@@ -11,6 +11,8 @@ class Aresta {
         int getV1();
         int getV2();
         int getPeso();
+
+        bool operator < (const Aresta& aresta2) const;
 };
 
 #endif
