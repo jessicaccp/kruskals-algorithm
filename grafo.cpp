@@ -1,6 +1,8 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<algorithm>
+#include<string.h>
 #include"grafo.hpp"
 
 Grafo::Grafo(std::string arquivo) {
@@ -56,10 +58,6 @@ void Grafo::criarGrafo() {
                         entrada >> inteiro;
                     Aresta aresta(i, j, inteiro);
                     arestas.push_back(aresta);
-                    if (i != j) {
-                        Aresta aresta2(j, i, inteiro);
-                        arestas.push_back(aresta2);
-                    }
                 }
             }
         }
@@ -71,10 +69,6 @@ void Grafo::criarGrafo() {
                     entrada >> inteiro;
                     Aresta aresta(i, j, inteiro);
                     arestas.push_back(aresta);
-                    if (i != j) {
-                        Aresta aresta2(j, i, inteiro);
-                        arestas.push_back(aresta2);
-                    }
                 }
             }
         }
@@ -84,7 +78,6 @@ void Grafo::criarGrafo() {
             exit(1);
         }
 
-        
         std::cout << "Grafo criado!" << std::endl;
         entrada.close();
     }
@@ -92,6 +85,40 @@ void Grafo::criarGrafo() {
         std::cout << "Erro ao ler o arquivo" << std::endl;
         exit(1);
     }
+}
+
+void Grafo::kruskal() {
+    std::vector<Aresta> arvore;
+    
+    sort(arestas.begin(), arestas.end());
+
+    int *subset = new int[getDimensao()];
+    memset(subset, -1, sizeof(int) * getDimensao());
+
+    for (int i = 0; i < arestas.size(); i++) {
+        int v1 = buscar(subset, arestas[i].getV1()), v2 = buscar(subset, arestas[i].getV2());
+
+        if (v1 != v2) {
+            arvore.push_back(arestas[i]);
+            unir(subset, v1, v2);
+        }
+    }
+
+    for (int i = 0; i < arvore.size(); i++) {
+        std::cout   << "(" << arvore[i].getV1() << ", " << arvore[i].getV2()
+                    << ") = " << arvore[i].getPeso() << std::endl;
+    }
+}
+
+int Grafo::buscar(int subset[], int i) {
+    if (subset[i] == -1)
+        return i;
+    return Grafo::buscar(subset, subset[i]);
+}
+
+void Grafo::unir(int subset[], int v1, int v2) {
+    int v1_set = buscar(subset, v1), v2_set = buscar(subset, v2);
+    subset[v1_set] = v2_set;
 }
 
 std::string Grafo::getFormato() {

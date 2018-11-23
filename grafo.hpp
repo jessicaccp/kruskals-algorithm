@@ -15,6 +15,9 @@ class Grafo {
         Grafo(std::string arquivo);
 
         void criarGrafo();
+        void kruskal();
+        int buscar(int subset[], int i);
+        void unir(int subset[], int v1, int v2);
 
         std::string getFormato();
         int getDimensao();
