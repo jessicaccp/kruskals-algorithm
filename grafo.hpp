@@ -21,6 +21,8 @@ class Grafo {
 
         std::string getFormato();
         int getDimensao();
+        std::string getNome();
+        std::string getComentario();
 
         void setNome(std::string nome);
         void setComentario(std::string comentario);
