@@ -1,4 +1,4 @@
-# tg-uece
+# kruskals-algorithm
 Trabalho da disciplina de Teoria dos Grafos: Implementação do Algoritmo de Kruskal
 
 ## Instruções
